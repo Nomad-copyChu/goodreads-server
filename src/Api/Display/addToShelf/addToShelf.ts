@@ -6,7 +6,6 @@ export default {
     addToShelf: async (_, args: AddToShelfMutationArgs, context) => {
       const { user } = context;
       const { shelfName, bookId } = args;
-      console.log(user);
       //진열 검색
       const display = await prisma.$exists.display({
         user: { id: user.id },
@@ -21,7 +20,6 @@ export default {
         .user({ id: user.id })
         .shelves({ where: { name: shelfName } });
       const book = await prisma.book({ id: bookId });
-      console.log(shelf);
       const madeDisplay = await prisma.createDisplay({
         user: { connect: { id: user.id } },
         book: { connect: { id: bookId } },
