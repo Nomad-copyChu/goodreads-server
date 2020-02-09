@@ -1,18 +1,22 @@
 type Book {
   id: ID! @id @unique
   title : String!
-  author: Author! @relation(name: "BookOfAuthor" ,onDelete: SET_NULL)
-  gernes: [Gerne!] @relation(name: "GerneOfBook",onDelete: SET_NULL)
-  covorImage: String!
-  description: String!
+  authors: [Author!]! @relation(name: "BookOfAuthor",onDelete: SET_NULL)
+  thumbnail: String!
+  contents: String
+  datetime: String
+  isbn: String! @unique
+  price: Int
+  publisher : String
+  saleStatus: String
+  wantCount: Int! @default(value:0)
+  readingCount: Int! @default(value:0)
+  readCount: Int! @default(value:0)
   comments: [Comment!] @relation(name: "CommentOfBook",onDelete: CASCADE)
-  ISBN: String! @unique
-  wantCount: Int!
-  readingCount: Int!
-  readCount: Int!
-  avgRating: Float!
-  pages: Int
-  avgRatings: Int
+  gernes: [Gerne!] @relation(name: "GerneOfBook",onDelete: SET_NULL)
+  ratings: [Rating!] @relation(name: "RatingOfBook",onDelete:CASCADE)
+  avgRating: Float! @default(value:0)
+  addUser: User @relation(name: "BookOfUser",onDelete: SET_NULL)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -20,13 +24,13 @@ type Book {
 type Author {
   id: ID! @id @unique
   name: String! @unique
-  Born: DateTime
-  Died: DateTime
+  born: DateTime
+  died: DateTime
   gernes: [Gerne!] @relation(name: "GerneOfAuthor",onDelete: SET_NULL)
   description: String
-  photos: [String] @scalarList(strategy: RELATION)
+  photos: [String!] @scalarList(strategy: RELATION)
   books: [Book!] @relation(name: "BookOfAuthor",onDelete: CASCADE)
-  Quotes: [Quote!] @relation(name: "QuoteOfAuthor",onDelete: CASCADE)
+  quotes: [Quote!] @relation(name: "QuoteOfAuthor",onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -57,12 +61,22 @@ type User {
   username: String! @unique
   profile: Profile @relation(name: "ProfileOfUser",onDelete:CASCADE)
   isAdmin: Boolean
-  RatingBooks: [Book] @scalarList(strategy: RELATION)
+  ratings:[Rating!]! @relation(name: "RatingOfUser",onDelete:CASCADE)
   bookAvgRating: Float
-  bookComments: [Comment] @relation(name: "BookCommentOfUser",onDelete:CASCADE)
-  shelves: [Shelf] @relation(name: "ShelfOfUser",onDelete:CASCADE)
-  likeQuotes: [Quote] @relation(name: "LikeQuoteOfUser",onDelete:SET_NULL)
-  displays: [Display] @relation(name: "DisplayOfUser",onDelete:CASCADE)
+  bookComments: [Comment!] @relation(name: "BookCommentOfUser",onDelete:CASCADE)
+  shelves: [Shelf!] @relation(name: "ShelfOfUser",onDelete:CASCADE)
+  likeQuotes: [Quote!] @relation(name: "LikeQuoteOfUser",onDelete:SET_NULL)
+  displays: [Display!] @relation(name: "DisplayOfUser",onDelete:CASCADE)
+  addedBooks:[Book!] @relation(name: "BookOfUser")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Rating {
+  id: ID! @id @unique
+  user: User! @relation(name: "RatingOfUser",onDelete:SET_NULL)
+  book: Book! @relation(name: "RatingOfBook",onDelete:SET_NULL)
+  count: Int!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -71,7 +85,7 @@ type Display {
   id: ID! @id @unique
   user: User @relation(name: "DisplayOfUser",onDelete:SET_NULL)
   book: Book 
-  shelves: [Shelf] @relation(name: "ShelfOfDisplay",onDelete:SET_NULL)
+  shelves: [Shelf!] @relation(name: "ShelfOfDisplay",onDelete:SET_NULL)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -80,7 +94,7 @@ type Shelf {
   id: ID! @id @unique
   user: User @relation(name: "ShelfOfUser",onDelete:SET_NULL)
   name: String!
-  displays: [Display] @relation(name: "ShelfOfDisplay",onDelete:CASCADE)
+  displays: [Display!] @relation(name: "ShelfOfDisplay",onDelete:CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -98,20 +112,20 @@ type Profile {
   bio: String
   interests: String
   favoriteBook: String
-   createdAt: DateTime! @createdAt
+  createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
 
 type Tag {
   id: ID! @id @unique
-  quotes :[Quote]  @relation(name: "TagOfQuote",onDelete:SET_NULL)
+  quotes :[Quote!]  @relation(name: "TagOfQuote",onDelete:SET_NULL)
   term: String! @unique
-    createdAt: DateTime! @createdAt
+  createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
 type Comment {
   id: ID! @id @unique
-  Book: Book @relation(name: "CommentOfBook",onDelete:SET_NULL)
+  book: Book @relation(name: "CommentOfBook",onDelete:SET_NULL)
   user: User @relation(name: "CommentOfUser",onDelete:SET_NULL)
   text: String!
   createdAt: DateTime! @createdAt

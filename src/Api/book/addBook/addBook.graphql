@@ -1,0 +1,13 @@
+type Mutation {
+  addBook(
+    title: String!
+    authors: [String!]!
+    thumbnail: String!
+    contents: String!
+    datetime: String
+    isbn: String!
+    price: Int
+    publisher: String
+    saleStatus: String
+  ): Book!
+}

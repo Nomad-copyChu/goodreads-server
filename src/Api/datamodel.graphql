@@ -1,18 +1,22 @@
 type Book {
   id: ID!
   title: String!
-  author: Author!
-  gernes: [Gerne!]
-  covorImage: String!
-  description: String!
-  comments: [Comment!]
-  ISBN: String!
+  authors: [Author!]!
+  thumbnail: String!
+  contents: String
+  datetime: String
+  isbn: String!
+  price: Int
+  publisher: String
+  saleStatus: String!
   wantCount: Int!
   readingCount: Int!
   readCount: Int!
+  comments: [Comment!]
+  gernes: [Gerne!]
+  ratings: [Rating!]
   avgRating: Float!
-  pages: Int
-  avgRatings: Int
+  addUser: User
   createdAt: String!
   updatedAt: String!
 }
@@ -20,13 +24,13 @@ type Book {
 type Author {
   id: ID!
   name: String!
-  Born: String
-  Died: String
+  born: String
+  died: String
   gernes: [Gerne!]
   description: String
   photos: [String]
   books: [Book!]
-  Quotes: [Quote!]
+  quotes: [Quote!]
   createdAt: String!
   updatedAt: String!
 }
@@ -57,12 +61,22 @@ type User {
   username: String!
   profile: Profile
   isAdmin: Boolean
-  RatingBooks: [Book]
+  ratings: [Rating!]!
+  ratingBooks: [Book]!
   bookAvgRating: Float
   bookComments: [Comment]
   shelves: [Shelf]
   likeQuotes: [Quote]
   displays: [Display]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Rating {
+  id: ID!
+  user: User!
+  book: Book!
+  count: Int!
   createdAt: String!
   updatedAt: String!
 }
@@ -109,7 +123,7 @@ type Tag {
 }
 type Comment {
   id: ID!
-  Book: Book
+  book: Book
   text: String!
   createdAt: String!
   updatedAt: String!
