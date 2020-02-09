@@ -1,6 +1,0 @@
-endpoint: https://goodreads-server-fcb22bfb7f.herokuapp.com
-datamodel: datamodel.prisma
-
-generate:
-  - generator: typescript-client
-    output: ./src/generated/prisma-client/
