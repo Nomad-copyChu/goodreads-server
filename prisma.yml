@@ -1,4 +1,4 @@
-endpoint: https://goodreads-server-fcb22bfb7f.herokuapp.com
+endpoint: ${env:PRISMA_ENDPOINT}
 datamodel: datamodel.prisma
 
 generate:
