@@ -1,5 +1,6 @@
 import { prisma } from "../../../generated/prisma-client";
-import { AddBookMutationArgs } from "../../../../types/graph.d";
+import { AddBookMutationArgs } from "../../../../types/graph";
+
 export default {
   Mutation: {
     addBook: async (_, args: AddBookMutationArgs, context) => {
@@ -23,14 +24,19 @@ export default {
       return await prisma.createBook({
         ...args,
         authors: {
-          create: createAuthors.map(author => ({
-            name: author
-          })),
+          create: () =>
+            createAuthors.map(author => ({
+              name: author
+            })),
           connect: connectAuthors.map(author => ({
             name: author
           }))
         },
-        addUser: { connect: { id: user.id } }
+        addUser: { connect: { id: user.id } },
+        wantCount: 0,
+        readCount: 0,
+        readingCount: 0,
+        avgRating: 0
       });
     }
   }

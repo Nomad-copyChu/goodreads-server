@@ -149,7 +149,7 @@ type File {
 type Mutation {
   addBook(title: String!, authors: [String!]!, thumbnail: String!, contents: String!, datetime: String, isbn: String!, price: Int, publisher: String, saleStatus: String): Book!
   rateBook(bookId: ID!): Rating!
-  addToShelf(shelfId: ID!, shelfName: String!, bookId: ID!): Display!
+  addToShelf(shelfName: String!, bookId: ID!): Display!
   subFromShelf(shelfId: ID!, bookId: ID!): Display!
   multipleUpload(files: [Upload!]!): [File!]!
   singleUpload(file: Upload!): String!

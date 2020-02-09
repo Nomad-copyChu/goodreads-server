@@ -1,42 +1,42 @@
 import { prisma } from "../generated/prisma-client";
 
-export const addBookCount = (book, shelfName) => {
+export const addBookCount = async (book, shelfName) => {
   if (shelfName === "want") {
-    prisma.updateBook({
+    await prisma.updateBook({
       where: { id: book.id },
       data: { wantCount: book.wantCount + 1 }
     });
   }
   if (shelfName === "reading") {
-    prisma.updateBook({
+    await prisma.updateBook({
       where: { id: book.id },
-      data: { wantCount: book.readingCount + 1 }
+      data: { readingCount: book.readingCount + 1 }
     });
   }
   if (shelfName === "read") {
-    prisma.updateBook({
+    await prisma.updateBook({
       where: { id: book.id },
-      data: { wantCount: book.readCount + 1 }
+      data: { readCount: book.readCount + 1 }
     });
   }
 };
-export const subBookCount = (book, shelfName) => {
+export const subBookCount = async (book, shelfName) => {
   if (shelfName === "want") {
-    prisma.updateBook({
+    await prisma.updateBook({
       where: { id: book.id },
       data: { wantCount: book.wantCount - 1 }
     });
   }
   if (shelfName === "reading") {
-    prisma.updateBook({
+    await prisma.updateBook({
       where: { id: book.id },
-      data: { wantCount: book.readingCount - 1 }
+      data: { readingCount: book.readingCount - 1 }
     });
   }
   if (shelfName === "read") {
-    prisma.updateBook({
+    await prisma.updateBook({
       where: { id: book.id },
-      data: { wantCount: book.readCount - 1 }
+      data: { readCount: book.readCount - 1 }
     });
   }
 };
