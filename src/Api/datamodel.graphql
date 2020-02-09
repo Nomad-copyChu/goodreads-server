@@ -1,0 +1,116 @@
+type Book {
+  id: ID!
+  title: String!
+  author: Author!
+  gernes: [Gerne!]
+  covorImage: String!
+  description: String!
+  comments: [Comment!]
+  ISBN: String!
+  wantCount: Int!
+  readingCount: Int!
+  readCount: Int!
+  avgRating: Float!
+  pages: Int
+  avgRatings: Int
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Author {
+  id: ID!
+  name: String!
+  Born: String
+  Died: String
+  gernes: [Gerne!]
+  description: String
+  photos: [String]
+  books: [Book!]
+  Quotes: [Quote!]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Gerne {
+  id: ID!
+  term: String!
+  books: [Book!]
+  authors: [Author!]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Quote {
+  id: ID!
+  term: String
+  author: Author
+  tags: [Tag!]
+  likesCount: Int
+  createdAt: String!
+  updatedAt: String!
+}
+
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  username: String!
+  profile: Profile
+  isAdmin: Boolean
+  RatingBooks: [Book]
+  bookAvgRating: Float
+  bookComments: [Comment]
+  shelves: [Shelf]
+  likeQuotes: [Quote]
+  displays: [Display]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Display {
+  id: ID!
+  user: User
+  book: Book
+  shelves: [Shelf]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Shelf {
+  id: ID!
+  user: User
+  name: String!
+  displays: [Display]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Profile {
+  id: ID!
+  username: String!
+  age: Int
+  gender: Gender
+  bio: String
+  interests: String
+  favoriteBook: String
+  createdAt: String!
+  updatedAt: String!
+}
+enum Gender {
+  Male
+  Female
+}
+type Tag {
+  id: ID!
+  quotes: [Quote]
+  term: String!
+  createdAt: String!
+  updatedAt: String!
+}
+type Comment {
+  id: ID!
+  Book: Book
+  text: String!
+  createdAt: String!
+  updatedAt: String!
+}

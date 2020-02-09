@@ -1,0 +1,3 @@
+type Mutation {
+  addQuote(term: String!, tags: [String], authorId: ID!): Quote!
+}

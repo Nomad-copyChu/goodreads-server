@@ -1,0 +1,120 @@
+type Book {
+  id: ID! @id @unique
+  title : String!
+  author: Author! @relation(name: "BookOfAuthor" ,onDelete: SET_NULL)
+  gernes: [Gerne!] @relation(name: "GerneOfBook",onDelete: SET_NULL)
+  covorImage: String!
+  description: String!
+  comments: [Comment!] @relation(name: "CommentOfBook",onDelete: CASCADE)
+  ISBN: String! @unique
+  wantCount: Int!
+  readingCount: Int!
+  readCount: Int!
+  avgRating: Float!
+  pages: Int
+  avgRatings: Int
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Author {
+  id: ID! @id @unique
+  name: String! @unique
+  Born: DateTime
+  Died: DateTime
+  gernes: [Gerne!] @relation(name: "GerneOfAuthor",onDelete: SET_NULL)
+  description: String
+  photos: [String] @scalarList(strategy: RELATION)
+  books: [Book!] @relation(name: "BookOfAuthor",onDelete: CASCADE)
+  Quotes: [Quote!] @relation(name: "QuoteOfAuthor",onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Gerne {
+  id: ID! @id @unique
+  term: String! @unique
+  books: [Book!] @relation(name: "GerneOfBook",onDelete:SET_NULL)
+  authors: [Author!] @relation(name: "GerneOfAuthor",onDelete:SET_NULL)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Quote {
+  id: ID! @id @unique
+  term: String @unique
+  author: Author @relation(name: "QuoteOfAuthor",onDelete:SET_NULL)
+  tags: [Tag!] @relation(name: "TagOfQuote",onDelete:SET_NULL)
+  likesCount: Int
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type User {
+  id: ID! @id @unique
+  email: String! @unique
+  password: String!
+  username: String! @unique
+  profile: Profile @relation(name: "ProfileOfUser",onDelete:CASCADE)
+  isAdmin: Boolean
+  RatingBooks: [Book] @scalarList(strategy: RELATION)
+  bookAvgRating: Float
+  bookComments: [Comment] @relation(name: "BookCommentOfUser",onDelete:CASCADE)
+  shelves: [Shelf] @relation(name: "ShelfOfUser",onDelete:CASCADE)
+  likeQuotes: [Quote] @relation(name: "LikeQuoteOfUser",onDelete:SET_NULL)
+  displays: [Display] @relation(name: "DisplayOfUser",onDelete:CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Display {
+  id: ID! @id @unique
+  user: User @relation(name: "DisplayOfUser",onDelete:SET_NULL)
+  book: Book 
+  shelves: [Shelf] @relation(name: "ShelfOfDisplay",onDelete:SET_NULL)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Shelf {
+  id: ID! @id @unique
+  user: User @relation(name: "ShelfOfUser",onDelete:SET_NULL)
+  name: String!
+  displays: [Display] @relation(name: "ShelfOfDisplay",onDelete:CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+type Profile {
+  id: ID! @id @unique
+  user: User @relation(name: "ProfileOfAuthor",onDelete:SET_NULL)
+  age: Int
+  gender: Gender!
+  bio: String
+  interests: String
+  favoriteBook: String
+   createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Tag {
+  id: ID! @id @unique
+  quotes :[Quote]  @relation(name: "TagOfQuote",onDelete:SET_NULL)
+  term: String! @unique
+    createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+type Comment {
+  id: ID! @id @unique
+  Book: Book @relation(name: "CommentOfBook",onDelete:SET_NULL)
+  user: User @relation(name: "CommentOfUser",onDelete:SET_NULL)
+  text: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
