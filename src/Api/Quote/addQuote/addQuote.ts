@@ -1,5 +1,5 @@
 import { prisma } from "../../../generated/prisma-client";
-import { AddQuoteMutationArgs } from "../../../../types/graph";
+import { AddQuoteMutationArgs } from "../../../../types/types";
 
 export default {
   Mutation: {

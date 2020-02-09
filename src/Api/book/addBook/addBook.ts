@@ -1,5 +1,5 @@
 import { prisma } from "../../../generated/prisma-client";
-import { AddBookMutationArgs } from "../../../../types/graph";
+import { AddBookMutationArgs } from "../../../../types/types";
 
 export default {
   Mutation: {
@@ -36,7 +36,8 @@ export default {
         wantCount: 0,
         readCount: 0,
         readingCount: 0,
-        avgRating: 0
+        totalRating: 0,
+        ratedUserNum: 0
       });
     }
   }

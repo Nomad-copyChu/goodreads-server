@@ -1,6 +1,7 @@
 import { addBookCount } from "../../../utils/bookCount";
 import { prisma } from "../../../generated/prisma-client";
-import { AddToShelfMutationArgs } from "../../../../types/graph.d";
+import { AddToShelfMutationArgs } from "../../../../types/types";
+
 export default {
   Mutation: {
     addToShelf: async (_, args: AddToShelfMutationArgs, context) => {

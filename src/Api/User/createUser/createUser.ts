@@ -1,6 +1,6 @@
 import { prisma } from "../../../generated/prisma-client";
 import bcrypt from "bcryptjs";
-import { CreateUserMutationArgs } from "../../../../types/graph.d";
+import { CreateUserMutationArgs } from "../../../../types/types";
 export default {
   Mutation: {
     createUser: async (_, args: CreateUserMutationArgs) => {
