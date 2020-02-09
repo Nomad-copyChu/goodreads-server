@@ -14,8 +14,8 @@ type Book {
   readCount: Int!
   comments: [Comment!]
   gernes: [Gerne!]
-  ratings: [Rating!]
-  avgRating: Float!
+  totalRating: Int!
+  ratedUserNum: Int!
   addUser: User
   createdAt: String!
   updatedAt: String!

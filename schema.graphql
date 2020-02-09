@@ -14,8 +14,8 @@ type Book {
   readCount: Int!
   comments: [Comment!]
   gernes: [Gerne!]
-  ratings: [Rating!]
-  avgRating: Float!
+  totalRating: Int!
+  ratedUserNum: Int!
   addUser: User
   createdAt: String!
   updatedAt: String!
@@ -148,9 +148,9 @@ type File {
 
 type Mutation {
   addBook(title: String!, authors: [String!]!, thumbnail: String!, contents: String!, datetime: String, isbn: String!, price: Int, publisher: String, saleStatus: String): Book!
-  rateBook(bookId: ID!): Rating!
+  rateBook(bookId: ID!, count: Int!): Rating!
   addToShelf(shelfName: String!, bookId: ID!): Display!
-  subFromShelf(shelfId: ID!, bookId: ID!): Display!
+  subFromShelf(shelfName: String!, bookId: ID!): Display!
   multipleUpload(files: [Upload!]!): [File!]!
   singleUpload(file: Upload!): String!
   addQuote(term: String!, tags: [String], authorId: ID!): Quote!

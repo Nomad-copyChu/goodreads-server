@@ -14,8 +14,8 @@ type Book {
   readCount: Int! @default(value:0)
   comments: [Comment!] @relation(name: "CommentOfBook",onDelete: CASCADE)
   gernes: [Gerne!] @relation(name: "GerneOfBook",onDelete: SET_NULL)
-  ratings: [Rating!] @relation(name: "RatingOfBook",onDelete:CASCADE)
-  avgRating: Float! @default(value:0)
+  totalRating:Int! @default(value:0)
+  ratedUserNum:Int! @default(value:0)
   addUser: User @relation(name: "BookOfUser",onDelete: SET_NULL)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -75,7 +75,7 @@ type User {
 type Rating {
   id: ID! @id @unique
   user: User! @relation(name: "RatingOfUser",onDelete:SET_NULL)
-  book: Book! @relation(name: "RatingOfBook",onDelete:SET_NULL)
+  book: Book! 
   count: Int!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
