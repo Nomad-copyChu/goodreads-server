@@ -28,7 +28,7 @@ type Author {
   died: String
   gernes: [Gerne!]
   description: String
-  photos: [String]
+  photo: String
   books: [Book!]
   quotes: [Quote!]
   createdAt: String!

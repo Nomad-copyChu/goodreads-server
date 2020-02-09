@@ -28,7 +28,7 @@ type Author {
   died: DateTime
   gernes: [Gerne!] @relation(name: "GerneOfAuthor",onDelete: SET_NULL)
   description: String
-  photos: [String!] @scalarList(strategy: RELATION)
+  photo: String
   books: [Book!] @relation(name: "BookOfAuthor",onDelete: CASCADE)
   quotes: [Quote!] @relation(name: "QuoteOfAuthor",onDelete: CASCADE)
   createdAt: DateTime! @createdAt
