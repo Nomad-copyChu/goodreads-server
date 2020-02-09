@@ -8,6 +8,7 @@ export default {
     likeQuotes: ({ id }) => prisma.user({ id }).likeQuotes(),
     displays: ({ id }) => prisma.user({ id }).displays(),
     bookAvgRating: async ({ id }) => {
+      //pg 연결에서 raw query를 날리면 훨씬 좋을듯
       const one = await prisma
         .ratingsConnection({ where: { user: { id }, count: 1 } })
         .aggregate()
