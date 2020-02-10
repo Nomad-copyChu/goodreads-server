@@ -28,7 +28,7 @@ type Author {
   died: String
   gernes: [Gerne!]
   description: String
-  photos: [String]
+  photo: String
   books: [Book!]
   quotes: [Quote!]
   createdAt: String!
@@ -136,14 +136,24 @@ scalar Upload
 
 type Query {
   uploads: [File]
+  serach(keyword: String!): [SearchResult]
+  getAuthors(gerne: String): [Author]!
+  getBooks(gerne: String, random: Boolean): [Book!]!
   getDisplays: [Display]!
   getShelves: [Shelf]!
+  getUser(userId: ID!): User!
 }
 
 type File {
   filename: String
   mimetype: String
   encoding: String
+}
+
+enum SearchResult {
+  User
+  Book
+  Author
 }
 
 type Mutation {

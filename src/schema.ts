@@ -14,8 +14,12 @@ const allResolvers = fileLoader(
 const schema = applyMiddleware(
   makeExecutableSchema({
     typeDefs: mergeTypes(allTypes),
-    resolvers: mergeResolvers(allResolvers)
+    resolvers: mergeResolvers(allResolvers),
+    resolverValidationOptions: {
+      requireResolversForResolveType: false
+    }
   }),
+
   permissions
 );
 

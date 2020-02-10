@@ -61,8 +61,8 @@ type User {
   username: String!
   profile: Profile
   isAdmin: Boolean
-  ratings: [Rating!]!
-  ratingBooks: [Book]!
+  ratings: [Rating!]
+  ratingBooks: [Book]
   bookAvgRating: Float
   bookComments: [Comment]
   shelves: [Shelf]

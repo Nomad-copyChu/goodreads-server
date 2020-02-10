@@ -7,6 +7,7 @@ export default {
     shelves: ({ id }) => prisma.user({ id }).shelves(),
     likeQuotes: ({ id }) => prisma.user({ id }).likeQuotes(),
     displays: ({ id }) => prisma.user({ id }).displays(),
+    profile: ({ id }) => prisma.user({ id }).profile(),
     bookAvgRating: async ({ id }) => {
       //pg 연결에서 raw query를 날리면 훨씬 좋을듯
       const one = await prisma
