@@ -22,5 +22,5 @@ const schema = applyMiddleware(
 
   permissions
 );
-
+console.log(schema);
 export default schema;
