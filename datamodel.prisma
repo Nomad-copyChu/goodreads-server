@@ -59,6 +59,7 @@ type User {
   email: String! @unique
   password: String!
   username: String! @unique
+  profilePhoto: String! @default(value:"https://goodreads-jerrynim.s3.ap-northeast-2.amazonaws.com/reading.svg")
   profile: Profile @relation(name: "ProfileOfUser",onDelete:CASCADE)
   isAdmin: Boolean
   ratings:[Rating!]! @relation(name: "RatingOfUser",onDelete:CASCADE)

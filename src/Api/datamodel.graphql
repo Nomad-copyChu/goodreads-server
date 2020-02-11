@@ -59,6 +59,7 @@ type User {
   email: String!
   password: String!
   username: String!
+  profilePhoto: String!
   profile: Profile
   isAdmin: Boolean
   ratings: [Rating!]
