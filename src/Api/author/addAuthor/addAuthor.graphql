@@ -6,5 +6,5 @@ type Mutation {
     gernes: [String]
     description: String
     photo: String
-  ): Author
+  ): Author!
 }

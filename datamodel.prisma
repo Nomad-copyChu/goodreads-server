@@ -28,7 +28,7 @@ type Author {
   died: DateTime
   gernes: [Gerne!] @relation(name: "GerneOfAuthor",onDelete: SET_NULL)
   description: String
-  photo: String
+  photo: String @default(value:"https://goodreads-jerrynim.s3.ap-northeast-2.amazonaws.com/ink-pen.png")
   books: [Book!] @relation(name: "BookOfAuthor",onDelete: CASCADE)
   quotes: [Quote!] @relation(name: "QuoteOfAuthor",onDelete: CASCADE)
   createdAt: DateTime! @createdAt

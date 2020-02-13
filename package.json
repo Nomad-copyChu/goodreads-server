@@ -38,7 +38,7 @@
     "types": "graphql-to-typescript ./schema.graphql ./types/types.ts",
     "prebuild": "cd src && copy ./Api/**/**/*.graphql ../build/ && copy ./Api/**/*.graphql ../build/ && copy ./Api/*.graphql ../build/ && prisma generate /build/",
     "build": "gulp babel",
-    "dev": "NODE_ENV=development nodemon --exec ts-node src/server.ts -e ts,graphql",
+    "dev": "NODE_ENV=development nodemon --exec ts-node --transpile-only src/server.ts -e ts,graphql",
     "start": "node build/server.js"
   }
 }

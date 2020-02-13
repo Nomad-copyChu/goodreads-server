@@ -59,10 +59,11 @@ type User {
   email: String!
   password: String!
   username: String!
+  profilePhoto: String!
   profile: Profile
   isAdmin: Boolean
-  ratings: [Rating!]!
-  ratingBooks: [Book]!
+  ratings: [Rating!]
+  ratingBooks: [Book]
   bookAvgRating: Float
   bookComments: [Comment]
   shelves: [Shelf]
@@ -136,7 +137,7 @@ scalar Upload
 
 type Query {
   uploads: [File]
-  serach(keyword: String!): [SearchResult]
+  search(keyword: String!): [SearchResult]
   getAuthors(gerne: String): [Author]!
   getBooks(gerne: String, random: Boolean): [Book!]!
   getDisplays: [Display]!
@@ -150,15 +151,14 @@ type File {
   encoding: String
 }
 
-enum SearchResult {
-  User
-  Book
-  Author
-}
+union SearchResult = User | Book | Author
 
 type Mutation {
-  addBook(title: String!, authors: [String!]!, thumbnail: String!, contents: String!, datetime: String, isbn: String!, price: Int, publisher: String, saleStatus: String): Book!
+  addAuthor(name: String!, born: String, died: String, gernes: [String], description: String, photo: String): Author!
+  addBook(title: String!, authors: [String!]!, gernes: [String], thumbnail: String!, contents: String!, datetime: String, isbn: String!, price: Int, publisher: String, saleStatus: String): Book!
   rateBook(bookId: ID!, count: Int!): Rating!
+  commentBook(bookId: ID!, text: String!): Comment!
+  deleteComment(commentId: ID!): Boolean
   addToShelf(shelfName: String!, bookId: ID!): Display!
   subFromShelf(shelfName: String!, bookId: ID!): Display!
   multipleUpload(files: [Upload!]!): [File!]!

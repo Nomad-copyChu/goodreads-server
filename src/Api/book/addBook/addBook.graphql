@@ -2,6 +2,7 @@ type Mutation {
   addBook(
     title: String!
     authors: [String!]!
+    gernes: [String]
     thumbnail: String!
     contents: String!
     datetime: String

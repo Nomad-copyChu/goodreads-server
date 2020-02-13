@@ -19,17 +19,19 @@ export default {
           }
         })
       );
-      await prisma.createAuthor({
-        ...args,
+      return await prisma.createAuthor({
+        name,
+        born,
+        died,
+        description,
+        photo,
         gernes: {
-          create: () =>
-            createGernes.map(gerne => ({
-              term: gerne
-            })),
-          connect: () =>
-            connectGernes.map(gerne => ({
-              name: gerne
-            }))
+          create: createGernes.map((gerne: string) => ({
+            term: gerne
+          })),
+          connect: connectGernes.map((gerne: string) => ({
+            term: gerne
+          }))
         }
       });
     }
