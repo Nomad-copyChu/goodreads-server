@@ -7,8 +7,4 @@
 
 TODO
 GOOGLE GITHUB FACEBOOK login
-get,create Quote
 admin can delete
-user 회원탈퇴
-create ,edit, delete, commnet
-create author
