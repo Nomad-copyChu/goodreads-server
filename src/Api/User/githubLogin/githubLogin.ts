@@ -29,16 +29,22 @@ export default {
       const user = await prisma.user({ username });
       if (user) {
         //존재하는 유저라면
-        return generateToken(user.id);
+        return { token: generateToken(user.id), isFirst: false };
       }
       try {
         const newUser = await prisma.createUser({
           username,
           email,
           password: `${Math.random() * 10000}`,
-          profilePhoto: avatar_url
+          profilePhoto: avatar_url,
+          shelves: {
+            create: [{ name: "read" }, { name: "reading" }, { name: "read" }]
+          }
         });
-        return generateToken(newUser.id);
+        return {
+          token: generateToken(newUser.id),
+          isFirst: true
+        };
       } catch (e) {
         throw Error("이미 가입된 username입니다.");
       }

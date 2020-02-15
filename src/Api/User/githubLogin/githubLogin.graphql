@@ -1,3 +1,8 @@
 type Mutation {
-  githubLogin(code: String): String!
+  githubLogin(code: String): GithubLoginResponse!
+}
+
+type GithubLoginResponse {
+  token: String!
+  isFirst: Boolean!
 }

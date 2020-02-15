@@ -1,6 +1,7 @@
 import { prisma } from "../../../generated/prisma-client";
 import bcrypt from "bcryptjs";
 import { CreateUserMutationArgs } from "../../../../types/types";
+import { generateToken } from "../../../utils/generateToken";
 export default {
   Mutation: {
     createUser: async (_, args: CreateUserMutationArgs) => {
@@ -15,54 +16,19 @@ export default {
         password,
         parseInt(process.env.BYCRIPT_ROUNDS)
       );
-      const user = await prisma.createUser({
-        email,
-        username,
-        password: hashedPassword
-      });
-      const wantShelf = await prisma.createShelf({
-        user: { connect: { id: user.id } },
-        name: "want"
-      });
-      await prisma.updateUser({
-        where: { id: user.id },
-        data: {
+      try {
+        const user = await prisma.createUser({
+          email,
+          username,
+          password: hashedPassword,
           shelves: {
-            connect: {
-              id: wantShelf.id
-            }
+            create: [{ name: "read" }, { name: "reading" }, { name: "read" }]
           }
-        }
-      });
-      const readingShelf = await prisma.createShelf({
-        user: { connect: { id: user.id } },
-        name: "reading"
-      });
-      await prisma.updateUser({
-        where: { id: user.id },
-        data: {
-          shelves: {
-            connect: {
-              id: readingShelf.id
-            }
-          }
-        }
-      });
-      const readShelf = await prisma.createShelf({
-        user: { connect: { id: user.id } },
-        name: "read"
-      });
-      await prisma.updateUser({
-        where: { id: user.id },
-        data: {
-          shelves: {
-            connect: {
-              id: readShelf.id
-            }
-          }
-        }
-      });
-      return await prisma.user({ id: user.id });
+        });
+        return generateToken(user.id);
+      } catch (e) {
+        throw Error(e.message);
+      }
     }
   }
 };
