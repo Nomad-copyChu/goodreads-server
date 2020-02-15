@@ -1,4 +1,5 @@
 import { rule, shield } from "graphql-shield";
+import addAuthor from "./api/author/addAuthor/addAuthor";
 
 const isAdmin = rule()(async (parent, args, ctx, info) => {
   if (ctx.isAdmin) {
@@ -14,9 +15,20 @@ const isLoggedIn = rule()(async (parent, args, ctx, info) => {
 });
 
 const permissions = shield({
-  Query: {},
+  Query: { getShelves: isLoggedIn, getDisplays: isLoggedIn },
   Mutation: {
-    deleteUser: isLoggedIn
+    deleteUser: isLoggedIn,
+    addAuthor: isLoggedIn,
+    addBook: isLoggedIn,
+    rateBook: isLoggedIn,
+    commentBook: isLoggedIn,
+    deleteComment: isLoggedIn,
+    addToShelf: isLoggedIn,
+    subFromShelf: isLoggedIn,
+    addQuote: isLoggedIn,
+    createShelf: isLoggedIn,
+    deleteShelf: isLoggedIn,
+    editShelf: isLoggedIn
   }
 });
 
