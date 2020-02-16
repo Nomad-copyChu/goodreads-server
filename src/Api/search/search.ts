@@ -3,7 +3,6 @@ import { prisma } from "../../generated/prisma-client";
 export default {
   SearchResult: {
     __resolveType(obj, context, info) {
-      console.log(obj);
       if (obj.name) {
         return "Author";
       }
@@ -26,7 +25,6 @@ export default {
         await prisma.authors({ where: { name_contains: keyword } }),
         await prisma.books({ where: { title_contains: keyword } })
       ]);
-      console.log(users, authors, books, "user");
       return users.concat(authors as any, books as any);
     }
   }

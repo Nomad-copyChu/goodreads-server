@@ -25,11 +25,8 @@ const server = new ApolloServer({
     if (token === undefined || token === "null") {
       return { ...context };
     } else {
-      const { id } = jwt.verify(token as string, process.env.JWT_SECRET) as {
-        id: string;
-        iat: number;
-      };
-      const user = await prisma.user({ id });
+      const id = jwt.verify(token as string, process.env.JWT_SECRET);
+      const user = await prisma.user({ id: id as string });
       if (user) {
         if (user.isAdmin) {
           return { ...context, user, isAdmin: true };

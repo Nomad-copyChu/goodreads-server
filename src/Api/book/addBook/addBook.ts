@@ -15,18 +15,30 @@ export default {
       let createGernes = [];
       //연결해야할 장르들
       let connectGernes = [];
-
-      await Promise.all([
-        await Promise.all(
-          gernes.map(async gerne => {
-            const existGerne = await prisma.$exists.gerne({ term: gerne });
-            if (existGerne) {
-              connectGernes.push(gerne);
-            } else {
-              createGernes.push(gerne);
-            }
-          })
-        ),
+      if (gernes) {
+        await Promise.all([
+          await Promise.all(
+            gernes.map(async gerne => {
+              const existGerne = await prisma.$exists.gerne({ term: gerne });
+              if (existGerne) {
+                connectGernes.push(gerne);
+              } else {
+                createGernes.push(gerne);
+              }
+            })
+          ),
+          await Promise.all(
+            authors.map(async author => {
+              const existAuthor = await prisma.$exists.author({ name: author });
+              if (existAuthor) {
+                connectAuthors.push(author);
+              } else {
+                createAuthors.push(author);
+              }
+            })
+          )
+        ]);
+      } else {
         await Promise.all(
           authors.map(async author => {
             const existAuthor = await prisma.$exists.author({ name: author });
@@ -36,9 +48,9 @@ export default {
               createAuthors.push(author);
             }
           })
-        )
-      ]);
-      console.log(createAuthors, connectAuthors, createGernes, connectGernes);
+        );
+      }
+
       return await prisma.createBook({
         ...args,
         authors: {
