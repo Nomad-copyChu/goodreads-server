@@ -22,6 +22,7 @@ const server = new ApolloServer({
   context: async context => {
     //프리스마 에서 유저를 찾아 request 넣는다
     const token = context.req.headers.authorization;
+    console.log(token);
     if (token === "undefined" || !token) {
       return { ...context };
     } else {
