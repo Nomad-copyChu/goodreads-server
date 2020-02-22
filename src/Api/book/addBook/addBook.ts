@@ -7,6 +7,23 @@ export default {
       //책 추가는 인증된 유저만 가능하게
       const { user } = context;
       const { bookInfos, authors } = args;
+      if (!bookInfos.title) {
+        throw Error("제목은 필수 입니다.");
+      }
+      if (!bookInfos.thumbnail) {
+        throw Error("책의 사진은 필수 입니다.");
+      }
+      if (!bookInfos.contents) {
+        throw Error("책 소개는 필수 입니다.");
+      }
+      if (!bookInfos.isbn) {
+        throw Error("isbn은 필수 입니다.");
+      }
+
+      const existBook = await prisma.$exists.book({ isbn: bookInfos.isbn });
+      if (existBook) {
+        throw Error("이미 등록된 책입니다.");
+      }
       //만들어야할 작가들
       let createAuthors = [];
       //연결해야할 작가들
