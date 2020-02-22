@@ -6,7 +6,7 @@ export default {
     addBook: async (_, args: AddBookMutationArgs, context) => {
       //책 추가는 인증된 유저만 가능하게
       const { user } = context;
-      const { authors, gernes } = args;
+      const { bookInfos, authors } = args;
       //만들어야할 작가들
       let createAuthors = [];
       //연결해야할 작가들
@@ -15,10 +15,10 @@ export default {
       let createGernes = [];
       //연결해야할 장르들
       let connectGernes = [];
-      if (gernes) {
+      if (bookInfos.gernes) {
         await Promise.all([
           await Promise.all(
-            gernes.map(async gerne => {
+            bookInfos.gernes.map(async gerne => {
               const existGerne = await prisma.$exists.gerne({ term: gerne });
               if (existGerne) {
                 connectGernes.push(gerne);
@@ -29,7 +29,9 @@ export default {
           ),
           await Promise.all(
             authors.map(async author => {
-              const existAuthor = await prisma.$exists.author({ name: author });
+              const existAuthor = await prisma.$exists.author({
+                name: author.name
+              });
               if (existAuthor) {
                 connectAuthors.push(author);
               } else {
@@ -41,7 +43,9 @@ export default {
       } else {
         await Promise.all(
           authors.map(async author => {
-            const existAuthor = await prisma.$exists.author({ name: author });
+            const existAuthor = await prisma.$exists.author({
+              name: author.name
+            });
             if (existAuthor) {
               connectAuthors.push(author);
             } else {
@@ -52,13 +56,13 @@ export default {
       }
 
       return await prisma.createBook({
-        ...args,
+        ...bookInfos,
         authors: {
           create: createAuthors.map(author => ({
-            name: author
+            ...author
           })),
           connect: connectAuthors.map(author => ({
-            name: author
+            name: author.name
           }))
         },
         gernes: {

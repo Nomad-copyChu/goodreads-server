@@ -1,9 +1,10 @@
-export const typeDefs = ["type Book {\n  id: ID!\n  title: String!\n  authors: [Author!]!\n  thumbnail: String!\n  contents: String\n  datetime: String\n  isbn: String!\n  price: Int\n  publisher: String\n  saleStatus: String!\n  wantCount: Int!\n  readingCount: Int!\n  readCount: Int!\n  comments: [Comment!]\n  gernes: [Gerne!]\n  totalRating: Int!\n  ratedUserNum: Int!\n  addUser: User\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Author {\n  id: ID!\n  name: String!\n  born: String\n  died: String\n  gernes: [Gerne!]\n  description: String\n  photo: String\n  books: [Book!]\n  quotes: [Quote!]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Gerne {\n  id: ID!\n  term: String!\n  books: [Book!]\n  authors: [Author!]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Quote {\n  id: ID!\n  term: String\n  author: Author\n  tags: [Tag!]\n  likesCount: Int\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype User {\n  id: ID!\n  email: String!\n  password: String!\n  username: String!\n  profilePhoto: String!\n  profile: Profile\n  isAdmin: Boolean\n  ratings: [Rating!]\n  ratingBooks: [Book]\n  bookAvgRating: Float\n  bookComments: [Comment]\n  shelves: [Shelf]\n  likeQuotes: [Quote]\n  displays: [Display]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Rating {\n  id: ID!\n  user: User!\n  book: Book!\n  count: Int!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Display {\n  id: ID!\n  user: User\n  book: Book\n  shelves: [Shelf]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Shelf {\n  id: ID!\n  user: User\n  name: String!\n  displays: [Display]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Profile {\n  id: ID!\n  username: String!\n  age: Int\n  gender: Gender\n  bio: String\n  interests: String\n  favoriteBook: String\n  createdAt: String!\n  updatedAt: String!\n}\n\nenum Gender {\n  Male\n  Female\n}\n\ntype Tag {\n  id: ID!\n  quotes: [Quote]\n  term: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Comment {\n  id: ID!\n  book: Book\n  text: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\nscalar Upload\n\ntype Query {\n  uploads: [File]\n  search(keyword: String!): [SearchResult]\n  getAuthors(gerne: String): [Author]!\n  getBooks(gerne: String, random: Boolean): [Book!]!\n  getDisplays: [Display]!\n  getShelves: [Shelf]!\n  getUser(userId: ID!): User!\n}\n\ntype File {\n  filename: String\n  mimetype: String\n  encoding: String\n}\n\nunion SearchResult = User | Book | Author\n\ntype Mutation {\n  addAuthor(name: String!, born: String, died: String, gernes: [String], description: String, photo: String): Author!\n  addBook(title: String!, authors: [String!]!, gernes: [String], thumbnail: String!, contents: String!, datetime: String, isbn: String!, price: Int, publisher: String, saleStatus: String): Book!\n  rateBook(bookId: ID!, count: Int!): Rating!\n  commentBook(bookId: ID!, text: String!): Comment!\n  deleteComment(commentId: ID!): Boolean\n  addToShelf(shelfName: String!, bookId: ID!): Display!\n  subFromShelf(shelfName: String!, bookId: ID!): Display!\n  multipleUpload(files: [Upload!]!): [File!]!\n  singleUpload(file: Upload!): String!\n  addQuote(term: String!, tags: [String], authorId: ID!): Quote!\n  deleteQuote(quoteId: ID!): Quote!\n  createShelf(name: String!): Shelf!\n  deleteShelf(shelfId: ID!): Shelf!\n  editShelf(shelfId: ID!, name: String!): Shelf!\n  createUser(email: String!, password: String!, username: String!): User!\n  deleteUser: User!\n  login(email: String!, password: String!): String!\n}\n"];
+export const typeDefs = ["type Book {\n  id: ID!\n  title: String!\n  authors: [Author!]!\n  thumbnail: String!\n  contents: String\n  datetime: String\n  isbn: String!\n  price: Int\n  publisher: String\n  saleStatus: String!\n  wantCount: Int!\n  readingCount: Int!\n  readCount: Int!\n  comments: [Comment!]\n  gernes: [Gerne!]\n  totalRating: Int!\n  ratedUserNum: Int!\n  addUser: User\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Author {\n  id: ID!\n  name: String!\n  born: String\n  died: String\n  gernes: [Gerne!]\n  description: String\n  photo: String\n  books: [Book!]\n  quotes: [Quote!]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Gerne {\n  id: ID!\n  term: String!\n  books: [Book!]\n  authors: [Author!]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Quote {\n  id: ID!\n  term: String\n  author: Author\n  tags: [Tag!]\n  likesCount: Int\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype User {\n  id: ID!\n  email: String!\n  password: String!\n  username: String!\n  profilePhoto: String!\n  profile: Profile\n  isAdmin: Boolean\n  ratings: [Rating!]\n  ratingBooks: [Book]\n  bookAvgRating: Float\n  bookComments: [Comment]\n  shelves: [Shelf]\n  likeQuotes: [Quote]\n  displays: [Display]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Rating {\n  id: ID!\n  user: User!\n  book: Book!\n  count: Int!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Display {\n  id: ID!\n  user: User\n  book: Book\n  shelves: [Shelf]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Shelf {\n  id: ID!\n  user: User\n  name: String!\n  displays: [Display]\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Profile {\n  id: ID!\n  username: String!\n  age: Int\n  gender: Gender\n  bio: String\n  interests: String\n  favoriteBook: String\n  createdAt: String!\n  updatedAt: String!\n}\n\nenum Gender {\n  Male\n  Female\n}\n\ntype Tag {\n  id: ID!\n  quotes: [Quote]\n  term: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\ntype Comment {\n  id: ID!\n  book: Book\n  text: String!\n  createdAt: String!\n  updatedAt: String!\n}\n\nscalar Upload\n\ntype Query {\n  uploads: [File]\n  search(keyword: String!): [SearchResult]\n  getAuthor(name: String): Author\n  getAuthors(gerne: String): [Author]!\n  getBooks(gerne: String, random: Boolean): [Book!]!\n  getDisplays: [Display]!\n  getShelves: [Shelf]!\n  getUser(userId: ID!): User!\n}\n\ntype File {\n  filename: String\n  mimetype: String\n  encoding: String\n}\n\nunion SearchResult = User | Book | Author\n\ntype Mutation {\n  addAuthor(name: String!, born: String, died: String, gernes: [String], description: String, photo: String): Author!\n  addBook(bookInfos: AddBookInfos, authors: [addBookAuthorInfos]): Book!\n  rateBook(bookId: ID!, count: Int!): Rating!\n  commentBook(bookId: ID!, text: String!): Comment!\n  deleteComment(commentId: ID!): Boolean\n  addToShelf(shelfName: String!, bookId: ID!): Display!\n  subFromShelf(shelfName: String!, bookId: ID!): Display!\n  multipleUpload(files: [Upload!]!): [File!]!\n  singleUpload(file: Upload!): String!\n  addQuote(term: String!, tags: [String], authorId: ID!): Quote!\n  deleteQuote(quoteId: ID!): Quote!\n  createShelf(name: String!): Shelf!\n  deleteShelf(shelfId: ID!): Shelf!\n  editShelf(shelfId: ID!, name: String!): Shelf!\n  createUser(email: String!, password: String!, username: String!): String!\n  deleteUser: User!\n  githubLogin(code: String): GithubLoginResponse!\n  login(email: String!, password: String!): String!\n}\n\ninput AddBookInfos {\n  title: String!\n  gernes: [String]\n  thumbnail: String!\n  contents: String!\n  datetime: String\n  isbn: String!\n  price: Int\n  publisher: String\n  saleStatus: String\n}\n\ninput addBookAuthorInfos {\n  name: String!\n  description: String\n  photo: String\n}\n\ntype GithubLoginResponse {\n  token: String!\n  isFirst: Boolean!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
   uploads: Array<File> | null;
   search: Array<SearchResult> | null;
+  getAuthor: Author | null;
   getAuthors: Array<Author>;
   getBooks: Array<Book>;
   getDisplays: Array<Display>;
@@ -13,6 +14,10 @@ export interface Query {
 
 export interface SearchQueryArgs {
   keyword: string;
+}
+
+export interface GetAuthorQueryArgs {
+  name: string | null;
 }
 
 export interface GetAuthorsQueryArgs {
@@ -183,8 +188,9 @@ export interface Mutation {
   createShelf: Shelf;
   deleteShelf: Shelf;
   editShelf: Shelf;
-  createUser: User;
+  createUser: string;
   deleteUser: User;
+  githubLogin: GithubLoginResponse;
   login: string;
 }
 
@@ -198,16 +204,8 @@ export interface AddAuthorMutationArgs {
 }
 
 export interface AddBookMutationArgs {
-  title: string;
-  authors: Array<string>;
-  gernes: Array<string> | null;
-  thumbnail: string;
-  contents: string;
-  datetime: string | null;
-  isbn: string;
-  price: number | null;
-  publisher: string | null;
-  saleStatus: string | null;
+  bookInfos: AddBookInfos | null;
+  authors: Array<addBookAuthorInfos> | null;
 }
 
 export interface RateBookMutationArgs {
@@ -271,9 +269,36 @@ export interface CreateUserMutationArgs {
   username: string;
 }
 
+export interface GithubLoginMutationArgs {
+  code: string | null;
+}
+
 export interface LoginMutationArgs {
   email: string;
   password: string;
 }
 
+export interface AddBookInfos {
+  title: string;
+  gernes: Array<string> | null;
+  thumbnail: string;
+  contents: string;
+  datetime: string | null;
+  isbn: string;
+  price: number | null;
+  publisher: string | null;
+  saleStatus: string | null;
+}
+
+export interface addBookAuthorInfos {
+  name: string;
+  description: string | null;
+  photo: string | null;
+}
+
 export type Upload = any;
+
+export interface GithubLoginResponse {
+  token: string;
+  isFirst: boolean;
+}

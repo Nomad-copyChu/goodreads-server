@@ -138,6 +138,7 @@ scalar Upload
 type Query {
   uploads: [File]
   search(keyword: String!): [SearchResult]
+  getAuthor(name: String): Author
   getAuthors(gerne: String): [Author]!
   getBooks(gerne: String, random: Boolean): [Book!]!
   getDisplays: [Display]!
@@ -155,7 +156,7 @@ union SearchResult = User | Book | Author
 
 type Mutation {
   addAuthor(name: String!, born: String, died: String, gernes: [String], description: String, photo: String): Author!
-  addBook(title: String!, authors: [String!]!, gernes: [String], thumbnail: String!, contents: String!, datetime: String, isbn: String!, price: Int, publisher: String, saleStatus: String): Book!
+  addBook(bookInfos: AddBookInfos, authors: [addBookAuthorInfos]): Book!
   rateBook(bookId: ID!, count: Int!): Rating!
   commentBook(bookId: ID!, text: String!): Comment!
   deleteComment(commentId: ID!): Boolean
@@ -168,7 +169,31 @@ type Mutation {
   createShelf(name: String!): Shelf!
   deleteShelf(shelfId: ID!): Shelf!
   editShelf(shelfId: ID!, name: String!): Shelf!
-  createUser(email: String!, password: String!, username: String!): User!
+  createUser(email: String!, password: String!, username: String!): String!
   deleteUser: User!
+  githubLogin(code: String): GithubLoginResponse!
   login(email: String!, password: String!): String!
+}
+
+input AddBookInfos {
+  title: String!
+  gernes: [String]
+  thumbnail: String!
+  contents: String!
+  datetime: String
+  isbn: String!
+  price: Int
+  publisher: String
+  saleStatus: String
+}
+
+input addBookAuthorInfos {
+  name: String!
+  description: String
+  photo: String
+}
+
+type GithubLoginResponse {
+  token: String!
+  isFirst: Boolean!
 }

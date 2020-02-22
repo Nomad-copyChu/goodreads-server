@@ -1,0 +1,8 @@
+type Query {
+  getAuthorsWithName(authors: [String!]!): [getAuthorsWithNameResponse]
+}
+type getAuthorsWithNameResponse {
+  name: String!
+  description: String
+  photo: String
+}
