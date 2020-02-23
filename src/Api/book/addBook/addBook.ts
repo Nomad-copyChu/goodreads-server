@@ -6,6 +6,9 @@ export default {
     addBook: async (_, args: AddBookMutationArgs, context) => {
       //책 추가는 인증된 유저만 가능하게
       const { user } = context;
+      if (!user) {
+        throw Error("로그인 한 유저만 책을 추가할 수 있습니다.");
+      }
       const { bookInfos, authors } = args;
       if (!bookInfos.title) {
         throw Error("제목은 필수 입니다.");

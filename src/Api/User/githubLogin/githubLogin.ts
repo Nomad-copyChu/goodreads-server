@@ -38,7 +38,7 @@ export default {
           password: `${Math.random() * 10000}`,
           profilePhoto: avatar_url,
           shelves: {
-            create: [{ name: "read" }, { name: "reading" }, { name: "read" }]
+            create: [{ name: "want" }, { name: "reading" }, { name: "read" }]
           }
         });
         return {
