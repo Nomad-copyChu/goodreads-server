@@ -14,7 +14,7 @@ type Book {
   readCount: Int!
   comments: [Comment!]
   gernes: [Gerne!]
-  totalRating: Int!
+  totalRating: Float!
   ratedUserNum: Int!
   addUser: User
   createdAt: String!
@@ -78,7 +78,7 @@ type Rating {
   id: ID!
   user: User!
   book: Book!
-  count: Int!
+  count: Float!
   createdAt: String!
   updatedAt: String!
 }

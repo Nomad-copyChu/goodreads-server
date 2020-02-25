@@ -1,3 +1,0 @@
-type Mutation {
-  rateBook(bookId: ID!, count: Int!): Rating!
-}

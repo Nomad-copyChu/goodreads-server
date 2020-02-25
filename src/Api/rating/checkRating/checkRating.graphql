@@ -1,0 +1,3 @@
+type Query {
+  checkRating(bookId: ID!): Rating
+}
