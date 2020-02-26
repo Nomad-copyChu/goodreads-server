@@ -8,7 +8,7 @@ type Book {
   isbn: String!
   price: Int
   publisher: String
-  saleStatus: String!
+  saleStatus: String
   wantCount: Int!
   readingCount: Int!
   readCount: Int!
