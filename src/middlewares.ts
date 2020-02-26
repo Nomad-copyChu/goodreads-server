@@ -15,7 +15,11 @@ const isLoggedIn = rule()(async (parent, args, ctx, info) => {
 });
 
 const permissions = shield({
-  Query: { getShelves: isLoggedIn, getDisplays: isLoggedIn },
+  Query: {
+    getShelves: isLoggedIn,
+    getDisplays: isLoggedIn,
+    checkRating: isLoggedIn
+  },
   Mutation: {
     deleteUser: isLoggedIn,
     addAuthor: isLoggedIn,
