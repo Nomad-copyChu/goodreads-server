@@ -12,8 +12,9 @@ export default {
       });
       if (isown) {
         await prisma.deleteComment({ id: commetId });
+      } else {
+        throw Error("댓글의 주인이 아닙니다.");
       }
-      throw Error("댓글의 주인이 아닙니다.");
     }
   }
 };

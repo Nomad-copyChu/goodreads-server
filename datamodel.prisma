@@ -127,7 +127,7 @@ type Tag {
 type Comment {
   id: ID! @id @unique
   book: Book @relation(name: "CommentOfBook",onDelete:SET_NULL)
-  user: User @relation(name: "CommentOfUser",onDelete:SET_NULL)
+  user: User @relation(name: "BookCommentOfUser",onDelete:SET_NULL)
   text: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

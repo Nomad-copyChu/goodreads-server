@@ -16,6 +16,7 @@ type Book {
   gernes: [Gerne!]
   totalRating: Float!
   ratedUserNum: Int!
+  avgRating: String!
   addUser: User
   createdAt: String!
   updatedAt: String!
@@ -65,7 +66,7 @@ type User {
   isAdmin: Boolean
   ratings: [Rating!]
   ratingBooks: [Book]
-  bookAvgRating: Float
+  bookAvgRating: String
   bookComments: [Comment]
   shelves: [Shelf]
   likeQuotes: [Quote]
@@ -125,6 +126,7 @@ type Tag {
 }
 type Comment {
   id: ID!
+  user: User
   book: Book
   text: String!
   createdAt: String!
