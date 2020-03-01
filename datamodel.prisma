@@ -31,6 +31,7 @@ type Author {
   photo: String @default(value:"https://goodreads-jerrynim.s3.ap-northeast-2.amazonaws.com/ink-pen.png")
   books: [Book!] @relation(name: "BookOfAuthor",onDelete: CASCADE)
   quotes: [Quote!] @relation(name: "QuoteOfAuthor",onDelete: CASCADE)
+  comments : [AuthorComment!] @relation(name: "CommentOfAuthor",onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
@@ -65,6 +66,7 @@ type User {
   ratings:[Rating!]! @relation(name: "RatingOfUser",onDelete:CASCADE)
   bookAvgRating: Float
   bookComments: [Comment!] @relation(name: "BookCommentOfUser",onDelete:CASCADE)
+  authorComments: [AuthorComment!] @relation(name: "AuthorCommentOfUser",onDelete:CASCADE)
   shelves: [Shelf!] @relation(name: "ShelfOfUser",onDelete:CASCADE)
   likeQuotes: [Quote!] @relation(name: "LikeQuoteOfUser",onDelete:SET_NULL)
   displays: [Display!] @relation(name: "DisplayOfUser",onDelete:CASCADE)
@@ -128,6 +130,14 @@ type Comment {
   id: ID! @id @unique
   book: Book @relation(name: "CommentOfBook",onDelete:SET_NULL)
   user: User @relation(name: "BookCommentOfUser",onDelete:SET_NULL)
+  text: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+type AuthorComment {
+  id: ID! @id @unique
+  author: Author @relation(name: "CommentOfAuthor",onDelete:SET_NULL)
+  user: User @relation(name: "AuthorCommentOfUser",onDelete:SET_NULL)
   text: String!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

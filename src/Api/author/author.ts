@@ -4,6 +4,7 @@ export default {
   Author: {
     gernes: ({ id }) => prisma.author({ id }).gernes(),
     books: ({ id }) => prisma.author({ id }).books(),
-    quotes: ({ id }) => prisma.author({ id }).quotes()
+    quotes: ({ id }) => prisma.author({ id }).quotes(),
+    comments: ({ id }) => prisma.author({ id }).comments()
   }
 };
