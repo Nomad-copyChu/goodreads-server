@@ -22,7 +22,7 @@ export default {
           username,
           password: hashedPassword,
           shelves: {
-            create: [{ name: "read" }, { name: "reading" }, { name: "read" }]
+            create: [{ name: "want" }, { name: "reading" }, { name: "read" }]
           }
         });
         return generateToken(user.id);
