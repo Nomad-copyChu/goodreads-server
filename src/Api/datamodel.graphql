@@ -16,7 +16,7 @@ type Book {
   gernes: [Gerne!]
   totalRating: Float!
   ratedUserNum: Int!
-  avgRating: String!
+  avgRating: Float!
   addUser: User
   createdAt: String!
   updatedAt: String!
