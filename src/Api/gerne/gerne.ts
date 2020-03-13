@@ -6,7 +6,7 @@ export default {
     books: async ({ id }) => prisma.gerne({ id }).books(),
     booksCount: ({ id }) =>
       prisma
-        .gernesConnection({ where: { id } })
+        .booksConnection({ where: { gernes_some: { id } } })
         .aggregate()
         .count()
   }
