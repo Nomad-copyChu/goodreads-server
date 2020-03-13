@@ -1,3 +1,0 @@
-type Mutation {
-  writeComment(username: String!, message: String!): CoronaComment
-}
