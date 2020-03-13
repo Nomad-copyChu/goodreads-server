@@ -10,7 +10,7 @@ export default {
           where: { gernes_every: { term: gerne } }
         });
       }
-      return await prisma.authors({ first: 2 });
+      return await prisma.authors();
     }
   }
 };
