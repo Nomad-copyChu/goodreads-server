@@ -4,11 +4,11 @@ export default {
   Mutation: {
     editProfile: async (_, args, context) => {
       const { user } = context;
-      const { profileId, username, age, gender, bio, interests } = args;
+      const { profileId, age, gender, bio, interests } = args;
 
       await prisma.updateProfile({
         where: { id: profileId },
-        data: { username, age, gender, bio, interests }
+        data: { age, gender, bio, interests }
       });
     }
   }
