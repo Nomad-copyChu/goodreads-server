@@ -1,5 +1,6 @@
 type Mutation {
   editUser(
+    userId: ID!
     username: String
     email: String
     profilePhoto: String

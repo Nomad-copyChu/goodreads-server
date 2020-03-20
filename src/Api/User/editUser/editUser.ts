@@ -4,11 +4,11 @@ export default {
   Mutation: {
     editUser: async (_, args, context) => {
       const { user } = context;
-      const { username, email, profilePhoto, profile } = args;
+      const { userId, username, email, profilePhoto, profile } = args;
 
-      const existUser = await prisma.$exists.user({ id: user.id });
+      const existUser = await prisma.$exists.user({ id: userId });
       await prisma.updateUser({
-        where: { id: user.id },
+        where: { id: userId },
         data: { username, email, profilePhoto, profile }
       });
     }
