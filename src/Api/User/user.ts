@@ -27,7 +27,7 @@ export default {
           .ratingsConnection({ where: { user: { id }, count: 4 } })
           .aggregate()
           .count(),
-        prisma
+        await prisma
           .ratingsConnection({ where: { user: { id }, count: 5 } })
           .aggregate()
           .count()
