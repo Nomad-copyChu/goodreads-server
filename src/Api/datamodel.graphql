@@ -105,7 +105,7 @@ type Shelf {
 
 type Profile {
   id: ID!
-  username: String!
+  user: User!
   age: Int
   gender: Gender
   bio: String

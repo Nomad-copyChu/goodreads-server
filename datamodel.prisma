@@ -55,15 +55,24 @@ type Quote {
   updatedAt: DateTime! @updatedAt
 }
 
+type Rating {
+  id: ID! @id @unique
+  reatedUser: User! @relation(link: INLINE)
+  book: Book! 
+  count: Float!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
 type User {
   id: ID! @id @unique
   email: String! @unique
   password: String!
   username: String! @unique
   profilePhoto: String! @default(value:"https://goodreads-jerrynim.s3.ap-northeast-2.amazonaws.com/reading.svg")
-  profile: Profile @relation(name: "ProfileOfUser",onDelete:CASCADE)
+  ratings: [Rating!]! 
+  profile: Profile @relation(link: TABLE)
   isAdmin: Boolean
-  ratings:[Rating!]! @relation(name: "RatingOfUser",onDelete:CASCADE)
   bookAvgRating: Float
   bookComments: [Comment!] @relation(name: "BookCommentOfUser",onDelete:CASCADE)
   authorComments: [AuthorComment!] @relation(name: "AuthorCommentOfUser",onDelete:CASCADE)
@@ -75,14 +84,7 @@ type User {
   updatedAt: DateTime! @updatedAt
 }
 
-type Rating {
-  id: ID! @id @unique
-  user: User! @relation(name: "RatingOfUser",onDelete:SET_NULL)
-  book: Book! 
-  count: Float!
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-}
+
 
 type Display {
   id: ID! @id @unique
@@ -109,7 +111,7 @@ enum Gender {
 
 type Profile {
   id: ID! @id @unique
-  user: User @relation(name: "ProfileOfAuthor",onDelete:SET_NULL)
+  user: User!
   age: Int
   gender: Gender!
   bio: String

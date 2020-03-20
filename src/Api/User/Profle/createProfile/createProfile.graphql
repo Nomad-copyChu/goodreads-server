@@ -1,9 +1,0 @@
-type Mutation {
-  createProfile(
-    age: Int
-    gender: Gender
-    bio: String
-    interests: String
-    favoriteBook: String
-  ): Profile!
-}

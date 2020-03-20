@@ -1,13 +1,7 @@
-enum Gender {
-  Male
-  Female
-}
-
 type Mutation {
   editProfile(
-    userId: ID!
     age: Int
-    gender: Gender!
+    gender: Gender
     bio: String
     interests: String
     favoriteBook: String
