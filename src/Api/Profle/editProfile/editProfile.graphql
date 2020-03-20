@@ -1,3 +1,8 @@
+enum Gender {
+  Male
+  Female
+}
+
 type Mutation {
   editProfile(
     userId: ID!

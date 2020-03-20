@@ -115,8 +115,8 @@ type Profile {
   updatedAt: String!
 }
 enum Gender {
-  Male
-  Female
+  MALE
+  FEMALE
 }
 type Tag {
   id: ID!
