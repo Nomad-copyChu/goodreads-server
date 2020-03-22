@@ -186,7 +186,7 @@ type Mutation {
   subFromShelf(shelfName: String!, bookId: ID!): Display!
   multipleUpload(files: [Upload!]!): [File!]!
   singleUpload(file: Upload!): String!
-  addQuote(term: String!, tags: [String], authorId: ID!): Quote!
+  addQuote(term: String!, tags: [String], authorName: String!): Quote!
   deleteQuote(quoteId: ID!): Quote!
   rateBook(bookId: ID!, count: Float!): Rating!
   createShelf(name: String!): Shelf!
@@ -198,8 +198,8 @@ type Mutation {
   login(email: String!, password: String!): String!
 }
 
-type EditAuthorArgs {
-  name: String!
+input EditAuthorArgs {
+  name: String
   born: String
   died: String
   gernes: [String!]

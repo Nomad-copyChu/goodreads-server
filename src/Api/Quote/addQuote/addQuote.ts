@@ -5,20 +5,24 @@ export default {
   Mutation: {
     addQuote: async (_, args: AddQuoteMutationArgs, context) => {
       const { user } = context;
-      const { term, tags, authorId } = args;
+      const { term, tags, authorName } = args;
       const existQuote = await prisma.$exists.quote({
         term
       });
       if (existQuote) {
         throw Error("이미 존재하는 명언입니다.");
       }
-      const author = await prisma.author({ id: authorId });
+      const author = await prisma.author({ name: authorName });
+      console.log(author);
       if (!author) {
-        throw Error("존재하지 않는 작가 입니다.");
+        await prisma.createAuthor({
+          name: authorName
+        });
       }
 
       const quote = await prisma.createQuote({
-        term: term
+        term: term,
+        author: { connect: { id: author.id } }
       });
 
       //
@@ -58,6 +62,7 @@ export default {
           }
         });
       }
+      return await prisma.quote({ id: quote.id });
     }
   }
 };
