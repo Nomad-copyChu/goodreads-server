@@ -8,14 +8,15 @@ type Book {
   isbn: String!
   price: Int
   publisher: String
-  saleStatus: String!
+  saleStatus: String
   wantCount: Int!
   readingCount: Int!
   readCount: Int!
   comments: [Comment!]
   gernes: [Gerne!]
-  totalRating: Int!
+  totalRating: Float!
   ratedUserNum: Int!
+  avgRating: Float!
   addUser: User
   createdAt: String!
   updatedAt: String!
@@ -31,6 +32,7 @@ type Author {
   photo: String
   books: [Book!]
   quotes: [Quote!]
+  comments: [AuthorComment!]
   createdAt: String!
   updatedAt: String!
 }
@@ -40,6 +42,7 @@ type Gerne {
   term: String!
   books: [Book!]
   authors: [Author!]
+  booksCount: Int!
   createdAt: String!
   updatedAt: String!
 }
@@ -64,7 +67,7 @@ type User {
   isAdmin: Boolean
   ratings: [Rating!]
   ratingBooks: [Book]
-  bookAvgRating: Float
+  bookAvgRating: String
   bookComments: [Comment]
   shelves: [Shelf]
   likeQuotes: [Quote]
@@ -77,7 +80,7 @@ type Rating {
   id: ID!
   user: User!
   book: Book!
-  count: Int!
+  count: Float!
   createdAt: String!
   updatedAt: String!
 }
@@ -102,7 +105,7 @@ type Shelf {
 
 type Profile {
   id: ID!
-  username: String!
+  user: User!
   age: Int
   gender: Gender
   bio: String
@@ -113,8 +116,8 @@ type Profile {
 }
 
 enum Gender {
-  Male
-  Female
+  MALE
+  FEMALE
 }
 
 type Tag {
@@ -127,7 +130,17 @@ type Tag {
 
 type Comment {
   id: ID!
+  user: User
   book: Book
+  text: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type AuthorComment {
+  id: ID!
+  author: Author
+  user: User
   text: String!
   createdAt: String!
   updatedAt: String!
@@ -138,12 +151,18 @@ scalar Upload
 type Query {
   uploads: [File]
   search(keyword: String!): [SearchResult]
-  getAuthor(name: String): Author
+  getAuthor(id: ID!): Author
+  getAuthorTwo: [Author]
   getAuthors(gerne: String): [Author]!
+  getAuthorsWithName(authors: [String!]!): [getAuthorsWithNameResponse]
+  getBook(id: ID!): Book!
   getBooks(gerne: String, random: Boolean): [Book!]!
   getDisplays: [Display]!
+  getGernes: [Gerne]
+  getQuotes: [Quote]
+  checkRating(bookId: ID!): Rating
   getShelves: [Shelf]!
-  getUser(userId: ID!): User!
+  getUser: User
 }
 
 type File {
@@ -155,9 +174,12 @@ type File {
 union SearchResult = User | Book | Author
 
 type Mutation {
+  editProfile(age: Int, gender: Gender, bio: String, interests: String, favoriteBook: String): Profile!
   addAuthor(name: String!, born: String, died: String, gernes: [String], description: String, photo: String): Author!
+  editAuthor(authorId: ID!, editAuthorArgs: EditAuthorArgs): Author
   addBook(bookInfos: AddBookInfos, authors: [addBookAuthorInfos]): Book!
-  rateBook(bookId: ID!, count: Int!): Rating!
+  deleteBook(bookId: ID!): Book!
+  commentAuthor(authorId: ID!, text: String!): AuthorComment
   commentBook(bookId: ID!, text: String!): Comment!
   deleteComment(commentId: ID!): Boolean
   addToShelf(shelfName: String!, bookId: ID!): Display!
@@ -166,6 +188,7 @@ type Mutation {
   singleUpload(file: Upload!): String!
   addQuote(term: String!, tags: [String], authorId: ID!): Quote!
   deleteQuote(quoteId: ID!): Quote!
+  rateBook(bookId: ID!, count: Float!): Rating!
   createShelf(name: String!): Shelf!
   deleteShelf(shelfId: ID!): Shelf!
   editShelf(shelfId: ID!, name: String!): Shelf!
@@ -173,6 +196,20 @@ type Mutation {
   deleteUser: User!
   githubLogin(code: String): GithubLoginResponse!
   login(email: String!, password: String!): String!
+}
+
+type EditAuthorArgs {
+  name: String!
+  born: String
+  died: String
+  gernes: [String!]
+  description: String
+}
+
+type getAuthorsWithNameResponse {
+  name: String!
+  description: String
+  photo: String
 }
 
 input AddBookInfos {

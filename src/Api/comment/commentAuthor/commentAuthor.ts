@@ -5,11 +5,13 @@ export default {
     commentAuthor: async (_, args, { user }) => {
       const { authorId, text } = args;
 
-      return await prisma.createAuthorComment({
+      const comment = await prisma.createAuthorComment({
         user: { connect: { id: user.id } },
         author: { connect: { id: authorId } },
         text
       });
+      console.log(comment);
+      return comment;
     }
   }
 };

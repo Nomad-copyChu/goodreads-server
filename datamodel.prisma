@@ -24,8 +24,8 @@ type Book {
 type Author {
   id: ID! @id @unique
   name: String! @unique
-  born: DateTime
-  died: DateTime
+  born: String
+  died: String
   gernes: [Gerne!] @relation(name: "GerneOfAuthor",onDelete: SET_NULL)
   description: String
   photo: String @default(value:"https://goodreads-jerrynim.s3.ap-northeast-2.amazonaws.com/ink-pen.png")
@@ -57,7 +57,7 @@ type Quote {
 
 type Rating {
   id: ID! @id @unique
-  reatedUser: User! @relation(link: INLINE)
+  user: User! @relation(link: INLINE)
   book: Book! 
   count: Float!
   createdAt: DateTime! @createdAt

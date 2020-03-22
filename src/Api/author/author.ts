@@ -5,6 +5,7 @@ export default {
     gernes: ({ id }) => prisma.author({ id }).gernes(),
     books: ({ id }) => prisma.author({ id }).books(),
     quotes: ({ id }) => prisma.author({ id }).quotes(),
-    comments: ({ id }) => prisma.author({ id }).comments()
+    comments: ({ id }) =>
+      prisma.author({ id }).comments({ orderBy: "createdAt_DESC" })
   }
 };

@@ -1,0 +1,11 @@
+input EditAuthorArgs {
+  name: String
+  born: String
+  died: String
+  gernes: [String!]
+  description: String
+}
+
+type Mutation {
+  editAuthor(authorId: ID!, editAuthorArgs: EditAuthorArgs): Author
+}
