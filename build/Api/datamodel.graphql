@@ -1,0 +1,144 @@
+type Book {
+  id: ID!
+  title: String!
+  authors: [Author!]!
+  thumbnail: String!
+  contents: String
+  datetime: String
+  isbn: String!
+  price: Int
+  publisher: String
+  saleStatus: String
+  wantCount: Int!
+  readingCount: Int!
+  readCount: Int!
+  comments: [Comment!]
+  gernes: [Gerne!]
+  totalRating: Float!
+  ratedUserNum: Int!
+  avgRating: Float!
+  addUser: User
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Author {
+  id: ID!
+  name: String!
+  born: String
+  died: String
+  gernes: [Gerne!]
+  description: String
+  photo: String
+  books: [Book!]
+  quotes: [Quote!]
+  comments: [AuthorComment!]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Gerne {
+  id: ID!
+  term: String!
+  books: [Book!]
+  authors: [Author!]
+  booksCount: Int!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Quote {
+  id: ID!
+  term: String
+  author: Author
+  tags: [Tag!]
+  likesCount: Int
+  createdAt: String!
+  updatedAt: String!
+}
+
+type User {
+  id: ID!
+  email: String!
+  password: String!
+  username: String!
+  profilePhoto: String!
+  profile: Profile
+  isAdmin: Boolean
+  ratings: [Rating!]
+  ratingBooks: [Book]
+  bookAvgRating: String
+  bookComments: [Comment]
+  shelves: [Shelf]
+  likeQuotes: [Quote]
+  displays: [Display]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Rating {
+  id: ID!
+  user: User!
+  book: Book!
+  count: Float!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Display {
+  id: ID!
+  user: User
+  book: Book
+  shelves: [Shelf]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Shelf {
+  id: ID!
+  user: User
+  name: String!
+  displays: [Display]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Profile {
+  id: ID!
+  user: User!
+  age: Int
+  gender: Gender
+  bio: String
+  interests: String
+  favoriteBook: String
+  createdAt: String!
+  updatedAt: String!
+}
+enum Gender {
+  MALE
+  FEMALE
+}
+type Tag {
+  id: ID!
+  quotes: [Quote]
+  term: String!
+  createdAt: String!
+  updatedAt: String!
+}
+type Comment {
+  id: ID!
+  user: User
+  book: Book
+  text: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type AuthorComment {
+  id: ID!
+  author: Author
+  user: User
+  text: String!
+  createdAt: String!
+  updatedAt: String!
+}

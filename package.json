@@ -39,10 +39,11 @@
     "prisma": "prisma deploy --force && prisma generate",
     "pretypes": "gql-merge --out-file ./schema.graphql ./src/Api/*.graphql ./src/Api/**/*.graphql ./src/Api/**/**/*.graphql  ",
     "types": "graphql-to-typescript ./schema.graphql ./types/types.ts",
-    "prebuild": "cd src && copy ./Api/**/**/*.graphql ../build/ && copy ./Api/**/*.graphql ../build/ && copy ./Api/*.graphql ../build/ && prisma generate /build/",
+    "prebuild": "prisma generate && cd src && copy ./Api/**/**/*.graphql ../build/ && copy ./Api/**/*.graphql ../build/ && copy ./Api/*.graphql ../build/",
     "build": "gulp babel",
     "dev": "NODE_ENV=development nodemon --exec ts-node --transpile-only src/server.ts -e ts,graphql",
     "start": "node build/server.js",
-    "reset": "prisma reset"
+    "reset": "prisma reset",
+    "generate": "prisma generate /build/"
   }
 }

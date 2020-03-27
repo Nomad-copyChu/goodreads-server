@@ -1,0 +1,3 @@
+type Query {
+  getAuthors(gerne: String): [Author]!
+}

@@ -1,0 +1,4 @@
+union SearchResult = User | Book | Author
+type Query {
+  search(keyword: String!): [SearchResult]
+}

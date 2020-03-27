@@ -1,0 +1,3 @@
+type Mutation {
+  commentBook(bookId: ID!, text: String!): Comment!
+}

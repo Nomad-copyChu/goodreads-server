@@ -1,0 +1,21 @@
+input AddBookInfos {
+  title: String!
+  gernes: [String]
+  thumbnail: String!
+  contents: String!
+  datetime: String
+  isbn: String!
+  price: Int
+  publisher: String
+  saleStatus: String
+}
+
+input addBookAuthorInfos {
+  name: String!
+  description: String
+  photo: String
+}
+
+type Mutation {
+  addBook(bookInfos: AddBookInfos, authors: [addBookAuthorInfos]): Book!
+}

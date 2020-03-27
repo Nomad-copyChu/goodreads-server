@@ -1,5 +1,6 @@
 import { rule, shield } from "graphql-shield";
 import addAuthor from "./api/author/addAuthor/addAuthor";
+import likeQuote from "./api/user/likeQuote/likeQuote";
 
 const isAdmin = rule()(async (parent, args, ctx, info) => {
   if (ctx.isAdmin) {
@@ -32,7 +33,8 @@ const permissions = shield({
     addQuote: isLoggedIn,
     createShelf: isLoggedIn,
     deleteShelf: isLoggedIn,
-    editShelf: isLoggedIn
+    editShelf: isLoggedIn,
+    likeQuote: isLoggedIn
   }
 });
 
