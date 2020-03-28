@@ -19,7 +19,6 @@ const schema = applyMiddleware(
       requireResolversForResolveType: false
     }
   }),
-
   permissions
 );
 export default schema;

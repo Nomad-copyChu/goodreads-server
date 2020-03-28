@@ -21,6 +21,7 @@
     "graphql-to-typescript": "^0.1.2",
     "graphql-tools": "^4.0.5",
     "graphql-upload": "^10.0.0",
+    "graphql-yoga": "^1.18.3",
     "gulp": "^4.0.2",
     "gulp-typescript": "^5.0.1",
     "lodash": "^4.17.15",
@@ -36,7 +37,7 @@
     "typescript": "^3.6.3"
   },
   "scripts": {
-    "prisma": "prisma deploy --force && prisma generate",
+    "prisma": "prisma deploy && prisma generate",
     "pretypes": "gql-merge --out-file ./schema.graphql ./src/Api/*.graphql ./src/Api/**/*.graphql ./src/Api/**/**/*.graphql  ",
     "types": "graphql-to-typescript ./schema.graphql ./types/types.ts",
     "prebuild": "prisma generate && cd src && copy ./Api/**/**/*.graphql ../build/ && copy ./Api/**/*.graphql ../build/ && copy ./Api/*.graphql ../build/",
@@ -44,6 +45,7 @@
     "dev": "NODE_ENV=development nodemon --exec ts-node --transpile-only src/server.ts -e ts,graphql",
     "start": "node build/server.js",
     "reset": "prisma reset",
-    "generate": "prisma generate /build/"
+    "generate": "prisma generate /build/",
+    "token": "prisma token"
   }
 }

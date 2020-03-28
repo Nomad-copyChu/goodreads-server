@@ -68,6 +68,6 @@ exports.models = [
 exports.Prisma = prisma_client_lib_1.makePrismaClientClass({
     typeDefs: prisma_schema_1.typeDefs,
     models: exports.models,
-    endpoint: "http://3.34.7.16:4466/goodreadkr-server/dev"
+    endpoint: "http://15.164.227.141:4466/dev"
 });
 exports.prisma = new exports.Prisma();

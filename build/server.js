@@ -50,30 +50,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var apollo_server_1 = require("apollo-server");
 var schema_1 = __importDefault(require("./schema"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var prisma_client_1 = require("./generated/prisma-client");
+var graphql_yoga_1 = require("graphql-yoga");
 require("dotenv").config();
-var server = new apollo_server_1.ApolloServer({
+var server = new graphql_yoga_1.GraphQLServer({
     schema: schema_1.default,
-    cors: {
-        origin: "*",
-        methods: "GET,HEAD,POST"
-    },
-    formatError: function (error) {
-        console.log(error);
-        return error;
-    },
-    formatResponse: function (response) {
-        return response;
-    },
     context: function (context) { return __awaiter(void 0, void 0, void 0, function () {
         var token, id, user;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    token = context.req.headers.authorization;
+                    token = context.request.headers.authorization;
                     if (!(token === "undefined" || !token)) return [3 /*break*/, 1];
                     return [2 /*return*/, __assign({}, context)];
                 case 1:
@@ -90,10 +79,7 @@ var server = new apollo_server_1.ApolloServer({
                     return [2 /*return*/, __assign({}, context)];
             }
         });
-    }); },
-    playground: true
+    }); }
 });
-server.listen({ port: process.env.PORT || 4000 }).then(function (_a) {
-    var url = _a.url;
-    console.log("NODE_ENV is", process.env.NODE_ENV, "\uD83D\uDE80  Server ready at " + url);
-});
+console.log(process.env.NODE_ENV);
+server.start(function () { return console.log("\uD83D\uDE80  Server ready at "); });

@@ -49,6 +49,7 @@ exports.default = {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        console.log("sibal");
                         email = args.email, password = args.password, username = args.username;
                         return [4 /*yield*/, prisma_client_1.prisma.$exists.user({
                                 OR: [{ username: username }, { email: email }]
@@ -74,6 +75,7 @@ exports.default = {
                             })];
                     case 4:
                         user = _a.sent();
+                        console.log(user, "userss");
                         return [2 /*return*/, generateToken_1.generateToken(user.id)];
                     case 5:
                         e_1 = _a.sent();

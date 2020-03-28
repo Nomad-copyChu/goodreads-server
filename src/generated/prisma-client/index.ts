@@ -7150,6 +7150,6 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `http://3.34.7.16:4466/goodreadkr-server/dev`
+  endpoint: `http://15.164.227.141:4466/dev`
 });
 export const prisma = new Prisma();
