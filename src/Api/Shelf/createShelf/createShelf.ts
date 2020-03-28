@@ -17,7 +17,7 @@ export default {
         throw Error("이미 존재하는 선반 이름입니다");
       }
 
-      await prisma.createShelf({
+      return await prisma.createShelf({
         name,
         user: {
           connect: {
