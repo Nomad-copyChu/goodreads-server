@@ -18,7 +18,7 @@ export default {
           }
         })
       );
-      console.log(createGernes, connectGernes);
+      console.log(editAuthorArgs);
       return await prisma.updateAuthor({
         where: { id: authorId },
         data: {

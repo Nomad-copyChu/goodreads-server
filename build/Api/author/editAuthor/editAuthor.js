@@ -79,7 +79,7 @@ exports.default = {
                                 }); }))];
                         case 1:
                             _b.sent();
-                            console.log(createGernes, connectGernes);
+                            console.log(editAuthorArgs);
                             return [4 /*yield*/, prisma_client_1.prisma.updateAuthor({
                                     where: { id: authorId },
                                     data: __assign(__assign({}, editAuthorArgs), { gernes: {

@@ -1,5 +1,5 @@
 input EditAuthorArgs {
-  name: String
+  photo: String
   born: String
   died: String
   gernes: [String!]

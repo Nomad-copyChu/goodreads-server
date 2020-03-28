@@ -36,50 +36,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var prisma_client_1 = require("../../generated/prisma-client");
+var prisma_client_1 = require("../../../generated/prisma-client");
 exports.default = {
-    User: {
-        ratings: function (_a) {
-            var id = _a.id;
-            return prisma_client_1.prisma.user({ id: id }).ratings();
-        },
-        bookComments: function (_a) {
-            var id = _a.id;
-            return prisma_client_1.prisma.user({ id: id }).bookComments();
-        },
-        shelves: function (_a) {
-            var id = _a.id;
-            return prisma_client_1.prisma.user({ id: id }).shelves();
-        },
-        likeQuotes: function (_a) {
-            var id = _a.id;
-            return prisma_client_1.prisma.user({ id: id }).likeQuotes();
-        },
-        displays: function (_a) {
-            var id = _a.id;
-            return prisma_client_1.prisma.user({ id: id }).displays();
-        },
-        profile: function (_a) {
-            var id = _a.id;
-            return prisma_client_1.prisma.user({ id: id }).profile();
-        },
-        bookAvgRating: function (_a) {
-            var id = _a.id;
-            return __awaiter(void 0, void 0, void 0, function () {
-                var userRatings, totalRating;
-                return __generator(this, function (_b) {
-                    switch (_b.label) {
-                        case 0: return [4 /*yield*/, prisma_client_1.prisma.user({ id: id }).ratings()];
-                        case 1:
-                            userRatings = _b.sent();
-                            totalRating = 0;
-                            userRatings.map(function (rating) {
-                                totalRating += rating.count;
-                            });
-                            return [2 /*return*/, (totalRating / userRatings.length).toFixed(2)];
-                    }
-                });
+    Query: {
+        getUserWithId: function (_, args) { return __awaiter(void 0, void 0, void 0, function () {
+            var userId;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        userId = args.userId;
+                        return [4 /*yield*/, prisma_client_1.prisma.user({ id: userId })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
             });
-        }
+        }); }
     }
 };

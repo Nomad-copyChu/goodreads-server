@@ -65,9 +65,7 @@ exports.default = {
                                     }
                                 }
                             })];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
+                    case 2: return [2 /*return*/, _a.sent()];
                 }
             });
         }); }

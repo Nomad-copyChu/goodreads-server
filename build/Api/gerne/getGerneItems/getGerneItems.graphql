@@ -1,0 +1,3 @@
+type Query {
+  getGerneItems(term: String!): Gerne
+}

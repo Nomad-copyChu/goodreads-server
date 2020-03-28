@@ -63,7 +63,7 @@ exports.default = {
                                 name: authorName
                             })];
                     case 3:
-                        _a.sent();
+                        author = _a.sent();
                         _a.label = 4;
                     case 4: return [4 /*yield*/, prisma_client_1.prisma.createQuote({
                             term: term,

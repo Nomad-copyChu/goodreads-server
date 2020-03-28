@@ -39,11 +39,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var prisma_client_1 = require("../../../generated/prisma-client");
 exports.default = {
     Query: {
-        getQuotes: function () { return __awaiter(void 0, void 0, void 0, function () {
-            var quotes;
+        getQuotes: function (_, args) { return __awaiter(void 0, void 0, void 0, function () {
+            var limit, quotes;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, prisma_client_1.prisma.quotes()];
+                    case 0:
+                        limit = args.limit;
+                        return [4 /*yield*/, prisma_client_1.prisma.quotes({ first: limit || 10 })];
                     case 1:
                         quotes = _a.sent();
                         return [2 /*return*/, quotes];

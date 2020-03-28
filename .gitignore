@@ -1,6 +1,5 @@
 node_modules
 .env
 prisma.yml
-src/generated
 graph.d.ts
 .DS_Store
