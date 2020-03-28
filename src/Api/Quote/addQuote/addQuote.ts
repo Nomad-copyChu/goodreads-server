@@ -12,10 +12,10 @@ export default {
       if (existQuote) {
         throw Error("이미 존재하는 명언입니다.");
       }
-      const author = await prisma.author({ name: authorName });
+      let author = await prisma.author({ name: authorName });
       console.log(author);
       if (!author) {
-        await prisma.createAuthor({
+        author = await prisma.createAuthor({
           name: authorName
         });
       }
