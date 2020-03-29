@@ -81,5 +81,5 @@ var server = new graphql_yoga_1.GraphQLServer({
         });
     }); }
 });
-console.log(process.env.NODE_ENV);
+console.log(process.env);
 server.start(function () { return console.log("\uD83D\uDE80  Server ready at "); });

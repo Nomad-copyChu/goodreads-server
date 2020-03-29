@@ -30,5 +30,4 @@ const server = new GraphQLServer({
     }
   }
 });
-console.log(process.env.NODE_ENV);
 server.start(() => console.log(`🚀  Server ready at `));

@@ -5,12 +5,7 @@ import permissions from "./middlewares";
 import { applyMiddleware } from "graphql-middleware";
 
 const allTypes = fileLoader(path.join(__dirname, "./Api/**/*.graphql"));
-const allResolvers = fileLoader(
-  path.join(
-    __dirname,
-    process.env.NODE_ENV === "production" ? "./Api/**/*.js" : "./Api/**/*.ts"
-  )
-);
+const allResolvers = fileLoader(path.join(__dirname, "./Api/**/*.js"));
 const schema = applyMiddleware(
   makeExecutableSchema({
     typeDefs: mergeTypes(allTypes),
@@ -18,7 +13,6 @@ const schema = applyMiddleware(
     resolverValidationOptions: {
       requireResolversForResolveType: false
     }
-  }),
-  permissions
+  })
 );
 export default schema;

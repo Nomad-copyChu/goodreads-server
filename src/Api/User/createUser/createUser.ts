@@ -5,7 +5,6 @@ import { generateToken } from "../../../utils/generateToken";
 export default {
   Mutation: {
     createUser: async (_, args: CreateUserMutationArgs) => {
-      console.log("sibal");
       const { email, password, username } = args;
       const existUser = await prisma.$exists.user({
         OR: [{ username }, { email }]
